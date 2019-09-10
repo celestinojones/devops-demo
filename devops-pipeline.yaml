@@ -1,71 +1,64 @@
-#Pipeline object has 4 properties: name stages triggers and variables
-name: $(date:yyyyMMdd)$(rev:.rr) #20190910.00
+name: $(date:yyyyMMdd)$(rev:.rr)
 
 stages:
   - stage: 'build'
-    condition: succeeded() #everything that happened in pipeline before we get here must be successful 
+    condition: succeeded() 
     displayName: 'build-mvc'
     jobs:
       - job:
-        condition: succeeded() #must have succeeded up to this pound and 
+        condition: succeeded()
         displayName: 'build-process'
-        pool:  #lets job know how to operate
+        pool:
           vmImage: 'ubuntu-16.04'
         steps:
           - script: |
-            echo 'build passed...' #commandline
+            echo 'build passed...'
 
   - stage: 'pack'
-    condition: succeeded() #everything that happened in pipeline before we get here must be successful 
-      displayName: 'pack-mvc'
-      jobs:
-        - job:
-          condition: succeeded() #must have succeeded up to this pound and 
-          displayName: 'pack-process'
-          pool:  #lets job know how to operate
-            vmImage: 'ubuntu-16.04'
-          steps:
-            - script: |
-              echo 'pack passed...' #commandline
+    condition: succeeded() 
+    displayName: 'pack-mvc'
+    jobs:
+      - job:
+        condition: succeeded()
+        displayName: 'pack-process'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - script: |
+            echo 'pack passed...'
 
   - stage: 'deploy'
-    condition: succeeded() #everything that happened in pipeline before we get here must be successful 
+    condition: succeeded() 
     displayName: 'deploy-mvc'
     jobs:
       - job:
-        condition: succeeded() #must have succeeded up to this pound and 
+        condition: succeeded()
         displayName: 'deploy-process'
-        pool:  #lets job know how to operate
+        pool:
           vmImage: 'ubuntu-16.04'
         steps:
           - script: |
-            echo 'deploy passed...' #commandline
+            echo 'deploy passed...'
 
   - stage: 'test'
-    condition: succeeded() #everything that happened in pipeline before we get here must be successful 
+    condition: succeeded() 
     displayName: 'test-mvc'
     jobs:
       - job:
-        condition: succeeded() #must have succeeded up to this pound and 
+        condition: succeeded()
         displayName: 'test-process'
-        pool:  #lets job know how to operate
+        pool:
           vmImage: 'ubuntu-16.04'
         steps:
           - script: |
-            echo 'test passed...' #commandline
+            echo 'test passed...'
 
-triggers: #listeners actually since the SCM actually triggers the pipeline - they are filters
+trigger:
   - branches:
       include:
         - master
-#this workstoo
-#triggers:
-# - master
-variables:
 
-#job:
-#displayName:  are properties
-#job:
-  #displayName          is an object with a property
-#-  job:                collection item with job and property displayName
-#   displayName:
+variables:
+  - name: testVar
+    value: 'tuesday'
+  testVar: 'tuesday'
