@@ -12,10 +12,25 @@ stages:
           vmImage: 'ubuntu-16.04'
         steps:
           - script: |
-              echo 'build passed...'
+              dotnet build
+
+  - stage: 'test'
+    condition: succeeded() 
+    dependsOn: build
+    displayName: 'test-mvc'
+    jobs:
+      - job:
+        condition: succeeded()
+        displayName: 'test-process'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - script: |
+              dotnet test
 
   - stage: 'pack'
     condition: succeeded() 
+    depondsOn: test
     displayName: 'pack-mvc'
     jobs:
       - job:
@@ -25,7 +40,7 @@ stages:
           vmImage: 'ubuntu-16.04'
         steps:
           - script: |
-              echo 'pack passed...'
+              docker
 
   - stage: 'deploy'
     condition: succeeded() 
@@ -39,19 +54,6 @@ stages:
         steps:
           - script: |
               echo 'deploy passed...'
-
-  - stage: 'test'
-    condition: succeeded() 
-    displayName: 'test-mvc'
-    jobs:
-      - job:
-        condition: succeeded()
-        displayName: 'test-process'
-        pool:
-          vmImage: 'ubuntu-16.04'
-        steps:
-          - script: |
-              echo 'test passed...'
 
 trigger:
   branches:
