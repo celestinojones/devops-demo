@@ -55,8 +55,8 @@ stages:
 
 trigger:
   - branches:
-      include:
-        - master
+    include:
+      - master
 
 variables:
   - name: testVar
