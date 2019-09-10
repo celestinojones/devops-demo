@@ -30,7 +30,7 @@ stages:
 
   - stage: 'pack'
     condition: succeeded() 
-    depondsOn: test
+    dependsOn: test
     displayName: 'pack-mvc'
     jobs:
       - job:
