@@ -2,56 +2,56 @@ name: $(date:yyyyMMdd)$(rev:.rr)
 
 stages:
   - stage: 'build'
-    condition: succeeded() 
-    displayName: 'build-mvc'
-    jobs:
-      - job:
-        condition: succeeded()
-        displayName: 'build-process'
-        pool:
-          vmImage: 'ubuntu-16.04'
-        steps:
-          - script: |
-            echo 'build passed...'
+      condition: succeeded() 
+      displayName: 'build-mvc'
+      jobs:
+        - job:
+          condition: succeeded()
+          displayName: 'build-process'
+          pool:
+            vmImage: 'ubuntu-16.04'
+          steps:
+            - script: |
+              echo 'build passed...'
 
   - stage: 'pack'
-    condition: succeeded() 
-    displayName: 'pack-mvc'
-    jobs:
-      - job:
-        condition: succeeded()
-        displayName: 'pack-process'
-        pool:
-          vmImage: 'ubuntu-16.04'
-        steps:
-          - script: |
-            echo 'pack passed...'
+      condition: succeeded() 
+      displayName: 'pack-mvc'
+      jobs:
+        - job:
+          condition: succeeded()
+          displayName: 'pack-process'
+          pool:
+            vmImage: 'ubuntu-16.04'
+          steps:
+            - script: |
+              echo 'pack passed...'
 
   - stage: 'deploy'
-    condition: succeeded() 
-    displayName: 'deploy-mvc'
-    jobs:
-      - job:
-        condition: succeeded()
-        displayName: 'deploy-process'
-        pool:
-          vmImage: 'ubuntu-16.04'
-        steps:
-          - script: |
-            echo 'deploy passed...'
+      condition: succeeded() 
+      displayName: 'deploy-mvc'
+      jobs:
+        - job:
+          condition: succeeded()
+          displayName: 'deploy-process'
+          pool:
+            vmImage: 'ubuntu-16.04'
+          steps:
+            - script: |
+              echo 'deploy passed...'
 
   - stage: 'test'
-    condition: succeeded() 
-    displayName: 'test-mvc'
-    jobs:
-      - job:
-        condition: succeeded()
-        displayName: 'test-process'
-        pool:
-          vmImage: 'ubuntu-16.04'
-        steps:
-          - script: |
-            echo 'test passed...'
+      condition: succeeded() 
+      displayName: 'test-mvc'
+      jobs:
+        - job:
+          condition: succeeded()
+          displayName: 'test-process'
+          pool:
+            vmImage: 'ubuntu-16.04'
+          steps:
+            - script: |
+              echo 'test passed...'
 
 trigger:
   - branches:
