@@ -54,7 +54,7 @@ stages:
               echo 'test passed...'
 
 trigger:
-  - branches:
+  branches:
     include:
       - master
 
