@@ -11,6 +11,10 @@ stages:
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
+          - task: UseDotNet@2
+            displayName: 'dotnet installer'
+            input:
+              version: '2.2.200'
           - script: |
               dotnet build
 
