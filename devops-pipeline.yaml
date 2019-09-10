@@ -13,7 +13,7 @@ stages:
         steps:
           - task: UseDotNet@2
             displayName: 'dotnet installer'
-            input:
+            inputs:
               version: '2.2.200'
           - script: |
               dotnet build
