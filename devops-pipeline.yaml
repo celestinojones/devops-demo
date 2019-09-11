@@ -30,7 +30,11 @@ stages:
           vmImage: 'ubuntu-16.04'
         steps:
           - script: |
+              dotnet install --global sonarscanner
+              dotnet sonarscanner begin /k:"testingdevops" /o:"Celestino Jones" /d:sonar.login="8f583409ecdc4227ebe9277455d564dc9a3a66b7"
+              dotnet build
               dotnet test -p:CollectCoverage=true
+              dotnet sonarscanner end /d:sonar.login="8f583409ecdc4227ebe9277455d564dc9a3a66b7" 
 
   - stage: 'pack'
     condition: succeeded() 
@@ -65,4 +69,4 @@ trigger:
       - master
 
 variables:
-  testVar: 'tuesday'
+  sonar: '8f583409ecdc4227ebe9277455d564dc9a3a66b7'
