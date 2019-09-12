@@ -60,10 +60,16 @@ stages:
               docker image build --file Dockerfile --tag devopsdemo .
               docker image tag devopsdemo celestinojones/devopsdemo
               docker push celestinojones/devopsdemo
+          - task: Docker@2
+            inputs:
+              command: 'logout'
+              containerRegistry: 'docker'
+            displayName: 'docker logout'
 
   - stage: 'deploy'
     condition: succeeded('pack') 
     dependsOn:
+        - test
         - pack
     displayName: 'deploy-mvc'
     jobs:
