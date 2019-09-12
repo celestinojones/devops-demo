@@ -51,8 +51,15 @@ stages:
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
+          - task: Docker@2
+            inputs:
+              command: 'login'
+              containerRegistry: 'docker'
+            displayName: 'docker login'
           - script: |
-              docker
+              docker image build --file Dockerfile --tag devopsdemo .
+              docker image tag devopsdemo celestinojones/devopsdemo
+              docker push
 
   - stage: 'deploy'
     condition: succeeded() 
