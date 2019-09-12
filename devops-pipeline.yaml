@@ -62,7 +62,7 @@ stages:
               docker push celestinojones/devopsdemo
 
   - stage: 'deploy'
-    condition: succeeded() 
+    condition: succeeded('pack') 
     displayName: 'deploy-mvc'
     jobs:
       - job:
