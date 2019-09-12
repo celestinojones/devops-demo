@@ -71,8 +71,11 @@ stages:
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
-          - script: |
-              echo 'working on i...'
+          - task: AzureWebAppContainer@1
+          inputs:
+            azureSubscription: 'Free Trial(97c8ada1-8d39-4848-b29c-43d34c82636b)'
+            appName: 'tinosdevopsdemo'
+            containers: 'celestinojones/devopsdemo'
 
 trigger:
   branches:
