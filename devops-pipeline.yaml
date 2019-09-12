@@ -59,7 +59,7 @@ stages:
           - script: |
               docker image build --file Dockerfile --tag devopsdemo .
               docker image tag devopsdemo celestinojones/devopsdemo
-              docker push
+              docker push celestinojones/devopsdemo
 
   - stage: 'deploy'
     condition: succeeded() 
