@@ -63,6 +63,8 @@ stages:
 
   - stage: 'deploy'
     condition: succeeded('pack') 
+    dependsOn:
+        - test
     displayName: 'deploy-mvc'
     jobs:
       - job:
